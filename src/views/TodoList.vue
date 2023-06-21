@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, computed, watch,Ref } from "vue";
 
 interface Todo {
   content: string;
@@ -7,8 +7,9 @@ interface Todo {
   createdAt: number;
 }
 
-const todos = ref<Todo[]>([]);
-const name = ref<string>("");
+const name: Ref<string | null> = ref("");
+const todos: Ref<Todo[]> = ref([]);
+
 const input_content = ref<string>("");
 
 const todos_asc = computed(() =>
@@ -29,7 +30,7 @@ const addTodo = () => {
 
   input_content.value = "";
 };
-const removeTodo = (todo) => {
+const removeTodo = (todo:any) => { //переделать, не делать так
   todos.value = todos.value.filter((t) => t !== todo);
 };
 
@@ -42,13 +43,15 @@ watch(
 );
 
 watch(name, (newVal) => {
-  localStorage.setItem("name", newVal);
+  localStorage.setItem("name", newVal || "");
 });
 
+
 onMounted(() => {
-  name.value = localStorage.getItem("name") || "";
-  todos.value = JSON.parse(localStorage.getItem("todos")) || [];
+  name.value = localStorage.getItem("name") ?? "";
+  todos.value = JSON.parse(localStorage.getItem("todos") ?? "[]");
 });
+
 </script>
 
 <template>
