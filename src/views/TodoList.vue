@@ -55,7 +55,7 @@ onMounted(() => {
   <main class="app">
     <section class="greeting">
       <h2 class="title">
-        Hello! <input type="text" placeholder="You can type name here" v-model="name" />
+        It's your task list, <input type="text" placeholder="You can type name here" v-model="name" />
       </h2>
     </section>
     <section class="create-todo">
