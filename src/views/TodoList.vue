@@ -76,7 +76,7 @@ onMounted(() => {
           v-for="todo in todos_asc"
           :class="`todo-item ${todo.done && 'done'}`"
         >
-
+        <input type="checkbox" v-model="todo.done" />
           <div class="todo-content">
             <input type="text" v-model="todo.content" />
           </div>
